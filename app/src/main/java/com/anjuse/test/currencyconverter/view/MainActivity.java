@@ -1,7 +1,9 @@
-package com.anjuse.test.currencyconverter;
+package com.anjuse.test.currencyconverter.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.anjuse.test.currencyconverter.R;
 
 public class MainActivity extends AppCompatActivity {
 
