@@ -1,9 +1,8 @@
 package com.anjuse.test.currencyconverter.data;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
-
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -15,40 +14,39 @@ import java.net.URLConnection;
 
 public class CurrencyData {
 
-    private String dataUrl = "http://api.fixer.io/latest";
-    private String dataUrlParameters = "base="+"USD";
+    private String url = "http://api.fixer.io/latest";
+    private String parameters = "base=USD";
     private String charset="UTF-8";
-    private JSONObject respuesta;
+    private JSONObject JSONresponse;
 
-    public void request(){
-        new GetRequest().execute(null, null, null);
+    public JSONObject request(String url, String base, String[] rates){
+        new GetRequest().execute(null, null, null); //Aca hay que mandar los parametros que se recibieron (url y base) y recibir un JSONObject como respuesta
+        return JSONresponse.getJSONObject("rates"); //Aca hay que retornar el JSONObject de los current del JSONObject que se recibio arriba
     }
 
-    public void urlConnecion(){
+
+    public JSONObject urlConnection(String url, String parameters){
         URLConnection connection = null;
         try {
-            InputStream response = new URL(dataUrl+"?"+dataUrlParameters).openStream();
-            Log.d("Respuesta", response.toString());
+            InputStream response = new URL(url+"?"+parameters).openStream();
             BufferedReader streamReader = new BufferedReader(new InputStreamReader(response, "UTF-8"));
             StringBuilder responseStrBuilder = new StringBuilder();
             String inputStr;
             while ((inputStr = streamReader.readLine()) != null)
                 responseStrBuilder.append(inputStr);
-            respuesta = new JSONObject(responseStrBuilder.toString());
-            System.out.println(respuesta);
+            JSONresponse = new JSONObject(responseStrBuilder.toString());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        return JSONresponse;
     }
 
 
-    private class GetRequest extends AsyncTask<URL, Integer, Long> {
-        protected Long doInBackground(URL... urls) {
-            urlConnecion();
-            return null;
+    private class GetRequest extends AsyncTask<URL, Integer, JSONObject> {
+        protected JSONObject doInBackground(URL... urls) {
+            return urlConnection(url, parameters);
         }
 
         protected void onProgressUpdate(Integer... progress) {
