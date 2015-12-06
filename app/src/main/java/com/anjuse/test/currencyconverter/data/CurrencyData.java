@@ -1,6 +1,8 @@
 package com.anjuse.test.currencyconverter.data;
 
+import android.os.AsyncTask;
 import android.util.Log;
+
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -10,15 +12,39 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 public class CurrencyData {
 
-    private String dataUrl;
-    String dataUrlParameters = "base="+"USD";
-    private URL url;
-    private HttpURLConnection connection=null;
+    private String dataUrl = "http://api.fixer.io/latest";
+    private String dataUrlParameters = "base="+"USD";
+    private String charset="UTF-8";
+    //private URL url;
+    //private static HttpURLConnection connection=null;
 
-    public void httpCall() {
+    public void request(){
+        new GetRequest().execute(null, null, null);
+    }
+
+    public void urlConnecion(){
+        URLConnection connection = null;
+        try {
+            connection = new URL(dataUrl + "?" + dataUrlParameters).openConnection();
+            connection.setRequestProperty("Accept-Charset", charset);
+            InputStream response = connection.getInputStream();
+            System.out.println(response);
+            Log.d("Responde", response.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /*public void httpCall() {
         try {
             url=new URL(dataUrl);
             connection = (HttpURLConnection) url.openConnection();
@@ -47,10 +73,25 @@ public class CurrencyData {
             rd.close();
             String responseStr = response.toString();
             Log.d("Server response", responseStr);
+            System.out.println(responseStr);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }*/
+
+    private class GetRequest extends AsyncTask<URL, Integer, Long> {
+        protected Long doInBackground(URL... urls) {
+            //httpCall();
+            urlConnecion();
+            return null;
+        }
+
+        protected void onProgressUpdate(Integer... progress) {
+        }
+
+        protected void onPostExecute(Long result) {
         }
     }
 
