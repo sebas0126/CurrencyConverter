@@ -19,7 +19,7 @@ public class CurrencyData {
     private String charset="UTF-8";
     private JSONObject JSONresponse;
 
-    public JSONObject request(String url, String base, String[] rates){
+    public JSONObject request(String url, String base){
         new GetRequest().execute(null, null, null); //Aca hay que mandar los parametros que se recibieron (url y base) y recibir un JSONObject como respuesta
         return JSONresponse.getJSONObject("rates"); //Aca hay que retornar el JSONObject de los current del JSONObject que se recibio arriba
     }

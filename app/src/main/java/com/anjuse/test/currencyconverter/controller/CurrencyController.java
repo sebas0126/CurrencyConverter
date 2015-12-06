@@ -16,7 +16,7 @@ public class CurrencyController {
             data=new CurrencyData();
         }
 
-        currencyRates=data.request(base);
+        currencyRates=data.request(url, base);
         if(currencyRates==null)return false;
         return true;
     }
@@ -28,6 +28,7 @@ public class CurrencyController {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return 0;
     }
 
 }
