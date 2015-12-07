@@ -18,7 +18,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class CurrencyData {
 
-    private JSONObject JSONresponse = null;
+    private JSONObject JSONresponse = null; //The response in JSON object
     private CountDownLatch reqLatch;
     private String LOG_TAG = CurrencyData.class.getSimpleName();
     public Context appContext;
@@ -47,6 +47,11 @@ public class CurrencyData {
         return null;
     }
 
+    /**
+     * Make the data request to the rest api with the url, A string builder is used to form the response in JSON format
+     * @param url Rest api url
+     * @param parameters Base currency
+     */
     private void urlConnection(String url, String parameters){
         try {
             InputStream response = new URL(url + "?" + parameters).openStream();
@@ -62,6 +67,9 @@ public class CurrencyData {
         }
     }
 
+    /**
+     * Run the data request to the rest api in a different thread
+     */
     private class GetRequest extends AsyncTask<String, Void, Boolean> {
         //args[0] url
         //args[1] paramétro
