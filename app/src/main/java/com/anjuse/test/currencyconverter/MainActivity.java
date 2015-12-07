@@ -30,6 +30,10 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         getCurrencies();
     }
 
+    /**
+     * Initialize the controller, and calls the getCurrencyRates in the controller, sends url and the base currency
+     * If it fails disable the edittext and shows an alert
+     */
     private void getCurrencies() {
         controller = new CurrencyController(MainActivity.this);
         if(!controller.getCurrencyRates("http://api.fixer.io/latest", "base=USD")){
@@ -48,7 +52,13 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         tvBrlCurrency = (TextView) findViewById(R.id.tv_brl_currency);
     }
 
-    @Override
+    /**
+     * When key is pressed, the imput number is converted and shows the currency rates, if the edittext is blank, clears the currency textviews
+     * @param v
+     * @param keyCode
+     * @param event
+     * @return
+     */
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if(event.getAction() == KeyEvent.ACTION_UP){
             if(!etUsdCurrency.getText().toString().equals("")) {
@@ -60,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         return false;
     }
 
+    /**
+     * Set the currency textviews empty
+     */
     private void clearRates(){
         tvGbpCurrency.setText("0");
         tvEurCurrency.setText("0");
@@ -67,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         tvBrlCurrency.setText("0");
     }
 
+    /**
+     * Calculate and shows each of the currency rates in it respective textview
+     */
     private void displayCurrencies(){
         double value=Double.parseDouble(etUsdCurrency.getText().toString());
         tvGbpCurrency.setText(""+controller.getRate(STR_CURRENCY_GBP) * value);
