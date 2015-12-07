@@ -11,5 +11,5 @@
     <string name="tv_title_jpy_currency">Japan Yen (JPY):</string>
     <string name="tv_title_brl_currency">Brazil Reals (BRL):</string>
 
-    <string name="dialog_message">Calculando...</string>
+    <string name="request_error_msg">Se ha producido un error en la consulta.</string>
 </resources>
