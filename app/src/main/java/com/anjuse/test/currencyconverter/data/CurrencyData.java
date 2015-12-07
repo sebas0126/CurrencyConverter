@@ -58,11 +58,9 @@ public class CurrencyData {
         //args[0] url
         //args[1] paramétro
         protected Boolean doInBackground(String... params) {
-            Log.v("BACK", "doInBackground BEFORE");
             urlConnection(params[0], params[1]);
             reqLatch.countDown();
             if(JSONresponse != null){
-                Log.v("BACK", "doInBackground AFTER " + JSONresponse.length());
                 return true;
             }
             return false;
@@ -73,5 +71,4 @@ public class CurrencyData {
                 Toast.makeText(appContext, appContext.getResources().getString(R.string.request_error_msg), Toast.LENGTH_SHORT).show();
         }
     }
-
 }
