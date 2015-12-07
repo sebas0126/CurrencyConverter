@@ -23,14 +23,23 @@ public class CurrencyData {
     private String LOG_TAG = CurrencyData.class.getSimpleName();
     public Context appContext;
 
+    /**
+     * Instanciates the async task that will execute the request
+     *
+     * @param url URI of the service to be requested
+     * @param base
+     * @param c The context of the application
+     * @return A JSONObject with the rates
+     */
     public JSONObject request(String url, String base, Context c){
         appContext = c;
         reqLatch = new CountDownLatch(1);
         GetRequest req = new GetRequest();
-        req.execute(url, base); //Aca hay que mandar los parametros que se recibieron (url y base) y recibir un JSONObject como respuesta
+        req.execute(url, base);
         try {
+            // We wait until the request is complete to return a value
             reqLatch.await();
-            return JSONresponse.getJSONObject("rates"); //Aca hay que retornar el JSONObject de los current del JSONObject que se recibio arriba
+            return JSONresponse.getJSONObject("rates");
         } catch (InterruptedException | JSONException e) {
             Log.e(LOG_TAG, e.getMessage());
             e.printStackTrace();
@@ -60,9 +69,8 @@ public class CurrencyData {
         protected Boolean doInBackground(String... params) {
             urlConnection(params[0], params[1]);
             reqLatch.countDown();
-            if(JSONresponse != null){
+            if(JSONresponse != null)
                 return true;
-            }
             return false;
         }
 

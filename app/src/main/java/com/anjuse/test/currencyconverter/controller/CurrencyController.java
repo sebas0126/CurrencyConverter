@@ -39,5 +39,4 @@ public class CurrencyController {
         }
         return 0;
     }
-
 }

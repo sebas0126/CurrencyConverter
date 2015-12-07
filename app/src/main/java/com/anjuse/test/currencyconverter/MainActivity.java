@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         }
     }
 
+    /**
+     * Initialize the graphics components that are needed in the aplication
+     */
     private void initializeComponents(){
         etUsdCurrency = (EditText) findViewById(R.id.et_input_value);
         etUsdCurrency.setOnKeyListener(this);
