@@ -38,7 +38,6 @@ public class CurrencyData {
         return null;
     }
 
-
     private void urlConnection(String url, String parameters){
         try {
             InputStream response = new URL(url + "?" + parameters).openStream();
