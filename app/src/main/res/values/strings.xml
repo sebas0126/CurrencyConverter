@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">CurrencyConverter</string>
+
+    <string name="lbl_input_val">Ingrese el valor a convertir</string>
+    <string name="lbl_usd_currency">USD</string>
+
+    <string name="hint_usd_currency">Bills</string>
+
+    <string name="tv_title_gbp_currency">UK Pounds (GBP):</string>
+    <string name="tv_title_eur_currency">EU Euro (EUR):</string>
+    <string name="tv_title_jpy_currency">Japan Yen (JPY):</string>
+    <string name="tv_title_brl_currency">Brazil Reals (BRL):</string>
+
+    <string name="dialog_message">Calculando...</string>
 </resources>
