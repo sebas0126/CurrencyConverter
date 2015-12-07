@@ -57,9 +57,20 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if(event.getAction() == KeyEvent.ACTION_UP){
             Log.v("KEY", "Key Up ");
+            if(!etUsdCurrency.getText().toString().equals("")) {
                 displayCurrencies();
+            }else{
+                clearRates();
+            }
         }
         return false;
+    }
+
+    private void clearRates(){
+        tvGbpCurrency.setText("");
+        tvEurCurrency.setText("");
+        tvJpyCurrency.setText("");
+        tvBrlCurrency.setText("");
     }
 
     private void displayCurrencies(){
